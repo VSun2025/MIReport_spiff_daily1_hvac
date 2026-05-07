@@ -1,4 +1,4 @@
-/****** Object:  View [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query1]    Script Date: 5/7/2026 1:05:54 PM ******/
+/****** Object:  View [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query1_test]    Script Date: 5/7/2026 12:44:13 PM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -8,9 +8,7 @@ GO
 
 
 
-
-
-CREATE OR ALTER view [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query1] as 
+CREATE OR ALTER view [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query1_test] as 
 SELECT AL7.employee_no as [Employee ID],
        AL7.s_first_name as [First Name],
        AL7.s_last_name as [Last Name],
@@ -36,8 +34,9 @@ SELECT AL7.employee_no as [Employee ID],
        AL9.site_id as [Site Id],
 	   CASE when Cast(AL1.final_dt AS DATE) >=cast(DATEADD(wk, DATEDIFF(wk, 18, GETDATE()), 8) as date) then '1' else 0 end as keep,
 	   CASE WHEN AL4.des ='IAQ AIR CLEANER' then 'Accessories'
-			WHEN AL4.des in ('AIR CONDITIONING','BOILER','BOILERS', 'ELECTRONIC RECOVERY','FURNACE', 'HEAT RECOVERY VENT.', 'HEAT PUMP') then 'BigBox'
-			WHEN AL4.des in ('IAQ HUMIDIFIER') then 'Humidifier'
+			WHEN AL4.des in ('AIR CONDITIONING','BOILER','BOILERS', 'ELECTRONIC RECOVERY','FURNACE', 'HEAT RECOVERY VENT.') then 'BigBox'
+			WHEN AL4.des in ('HEAT PUMP') then 'HeatPump' --single out as new category by Alina 20260508
+            WHEN AL4.des in ('IAQ HUMIDIFIER') then 'Humidifier'
 			ELSE 'Other' END as [Product Type]
 FROM   pbi.perform_so AL1,
        pbi.perform_so_ln AL2,
@@ -70,7 +69,7 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
              AND AL2.void_flag = 'N'
              AND AL4.des IN ( 'AIR CONDITIONERS', 'AIR CONDITIONING', 'BOILER',
                               'BOILERS',
-                              'ELECTRONIC RECOVERY.', 'ELECTRONIC RECOVERY', 'FURNACE', 'FURNACES', -- added 'ELECTRONIC RECOVERY' ON 20260424
+                              'ELECTRONIC RECOVERY.', 'FURNACE', 'FURNACES',
                                   'HEAT RECOVERY VENT.',
                               'IAQ AIR CLEANER', 'IAQ HUMIDIFIER', 'HEAT PUMP' )
              AND AL5.des IN ( 'CENTRALLY DUCTED',
@@ -81,7 +80,7 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
                               'BURNER',
                               'CENTRAL', 'CHILLERS', 'CONVENTIONAL',
                               'DUCTLESS SPLIT',
-                              'DYNAMIC', 'ELECTRONIC RECOVERY', 'ELECTROSTATIC', 'ELECTRONIC RECOVERY.', -- added 'ELECTRONIC RECOVERY.' ON 20260424
+                              'DYNAMIC', 'ELECTRONIC RECOVERY', 'ELECTROSTATIC',
                               'FURNACE DRUM',
                               'FURNACE FLOW THRU', 'GCOMBO AIR/FP',
                               'GCOMBO BOILER/FP',
@@ -210,7 +209,6 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
 
 AND SUBSTRING(AL8.s_login_name, LEN(AL8.s_login_name),1) not in ('5','9')
 AND AL8.s_login_name<>'SSUPPORT'
-/* New as of March 2026 START */
 AND AL3.vsn NOT LIKE 'BRR%' 
 AND AL1.del_doc_num NOT IN (SELECT AL11.del_doc_num
                                      FROM   pbi.perform_so AL11,
@@ -219,7 +217,6 @@ AND AL1.del_doc_num NOT IN (SELECT AL11.del_doc_num
                                      WHERE  ( AL12.itm_cd = AL13.itm_cd AND AL12.del_doc_num = AL11.del_doc_num )                                            
                                      AND AL12.void_flag = 'N'
 									 AND (AL13.des IN ('BRR SF SPECIAL DISCOUNT', 'BRR SF SPECIAL DISCOUNT TBD') ))
-/* New as of March 2026 END */
 )
 GO
 

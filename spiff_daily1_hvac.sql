@@ -16,6 +16,11 @@ SELECT
                 WHEN Total_Units <= 50 THEN '50' 
                 ELSE '75' 
             END
+    WHEN [Product Type] = ' HeatPump ' THEN 
+            CASE 
+                WHEN Total_Units <= 50 THEN '75' 
+                ELSE '100' 
+            END
         WHEN [Product Type] = 'Humidifier' THEN '20'
         ELSE '15'
     END AS PymtAmt,
