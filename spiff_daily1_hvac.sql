@@ -16,7 +16,7 @@ SELECT
                 WHEN Total_Units <= 50 THEN '50' 
                 ELSE '75' 
             END
-    WHEN [Product Type] = ' HeatPump ' THEN 
+    WHEN [Product Type] = 'HeatPump' THEN 
             CASE 
                 WHEN Total_Units <= 50 THEN '75' 
                 ELSE '100' 
