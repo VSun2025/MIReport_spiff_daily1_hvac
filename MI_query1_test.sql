@@ -1,9 +1,9 @@
-/****** Object:  View [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query1_test]    Script Date: 5/7/2026 12:44:13 PM ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
+
 
 
 
@@ -219,5 +219,3 @@ AND AL1.del_doc_num NOT IN (SELECT AL11.del_doc_num
 									 AND (AL13.des IN ('BRR SF SPECIAL DISCOUNT', 'BRR SF SPECIAL DISCOUNT TBD') ))
 )
 GO
-
-
