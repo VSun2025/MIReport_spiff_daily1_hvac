@@ -1,4 +1,4 @@
-/****** Object:  View [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query2_test]    Script Date: 5/8/2026 10:45:45 AM ******/
+/****** Object:  View [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query2]    Script Date: 5/8/2026 10:45:19 AM ******/
 SET ANSI_NULLS ON
 GO
 
@@ -7,7 +7,9 @@ GO
 
 
 
-CREATE OR ALTER   view  [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query2_test] as 
+
+
+CREATE   view  [pbi].[perform_MI_Payment_Sales_HVAC_weekly_query2] as 
 SELECT AL7.employee_no as [Employee ID],
        AL7.s_first_name as [First Name],
        AL7.s_last_name as [Last Name],
@@ -67,7 +69,7 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
              AND AL1.ord_tp_cd = 'SAL'
              AND AL1.stat_cd = 'F'
              AND AL2.void_flag = 'N'
-               AND AL4.des IN ( 'AIR CONDITIONERS', 'AIR CONDITIONING', 'BOILER',
+             AND AL4.des IN ( 'AIR CONDITIONERS', 'AIR CONDITIONING', 'BOILER',
                               'BOILERS',
                               'ELECTRONIC RECOVERY.', 'ELECTRONIC RECOVERY', 'FURNACE',  -- added 'ELECTRONIC RECOVERY' ON 20260424
                                   'HEAT RECOVERY VENT.',
