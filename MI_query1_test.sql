@@ -69,7 +69,7 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
              AND AL2.void_flag = 'N'
              AND AL4.des IN ( 'AIR CONDITIONERS', 'AIR CONDITIONING', 'BOILER',
                               'BOILERS',
-                              'ELECTRONIC RECOVERY.', 'FURNACE', 'FURNACES',
+                              'ELECTRONIC RECOVERY.', 'ELECTRONIC RECOVERY', 'FURNACE', 'FURNACES', -- added 'ELECTRONIC RECOVERY' ON 20260424
                                   'HEAT RECOVERY VENT.',
                               'IAQ AIR CLEANER', 'IAQ HUMIDIFIER', 'HEAT PUMP' )
              AND AL5.des IN ( 'CENTRALLY DUCTED',
@@ -80,7 +80,7 @@ WHERE  ( AL2.itm_cd = AL3.itm_cd
                               'BURNER',
                               'CENTRAL', 'CHILLERS', 'CONVENTIONAL',
                               'DUCTLESS SPLIT',
-                              'DYNAMIC', 'ELECTRONIC RECOVERY', 'ELECTROSTATIC',
+                              'DYNAMIC', 'ELECTRONIC RECOVERY', 'ELECTROSTATIC', 'ELECTRONIC RECOVERY.', -- added 'ELECTRONIC RECOVERY.' ON 20260424
                               'FURNACE DRUM',
                               'FURNACE FLOW THRU', 'GCOMBO AIR/FP',
                               'GCOMBO BOILER/FP',
